@@ -56786,9 +56786,10 @@ var render = function() {
       [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-body" }, [
-            _vm.loading
-              ? _c("div", [_vm._v("Loading...")])
-              : _c("div", [
+            _vm.loading ? _c("div", [_vm._v("Loading...")]) : _vm._e(),
+            _vm._v(" "),
+            _vm.hasBooking
+              ? _c("div", [
                   _c(
                     "p",
                     [
@@ -56819,6 +56820,7 @@ var render = function() {
                     )
                   ])
                 ])
+              : _vm._e()
           ])
         ])
       ]

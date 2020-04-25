@@ -6,7 +6,7 @@
       <div class="card">
         <div class="card-body">
           <div v-if="loading">Loading...</div>
-          <div v-else>
+          <div v-if="hasBooking">
             <p>
               Stayed at
               <router-link :to="{name: 'Bookable', params: {id: booking.bookable.bookable_id}}">{{booking.bookable.title}}</router-link>

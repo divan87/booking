@@ -18,13 +18,28 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'id' => 'required|size:36',
+            'id' => 'required|size:36|unique:reviews',
             'content' => 'required|min:2',
             'rating' => 'required|in:1,2,3,4,5'
         ]);
 
         $booking = Booking::findByReviewKey($data['id']);
 
-        
+        if (null === $booking) {
+            return abort(404);
+        }
+
+        $booking->review_key = '';
+        $booking->save();
+
+        $review = Review::make($data);  //это называется mass assign. Чтобы его провернуть, нужно, 
+                                        //чтобы в моделе было описано protected fillable - массив полей, которые можно заполнить кучей
+        $review->booking_id = $booking->id;
+        $review->bookable_id = $booking->bookable_id;
+        $review->save();
+
+        return new ReviewResource($review);
+
+
     }
 }
