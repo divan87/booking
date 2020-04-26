@@ -4,7 +4,7 @@
       Check availaibility
       <span v-if="notAvailability">(NOT AVAILABLE)</span>
       <span v-if="hasAvailability">(AVAILABLE)</span>
-      </h6>
+    </h6>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="from">From</label>
@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import { is404, is422 } from "../shared/utils/response";
+
 export default {
   props: {
     bookableId: String
@@ -73,7 +75,7 @@ export default {
           this.status = response.status;
         })
         .catch(error => {
-          if (422 === error.response.status) {
+          if (is422(error)) {
             this.errors = error.response.data.errors;
           }
           this.status = error.response.status;
