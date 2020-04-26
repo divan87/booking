@@ -17,6 +17,7 @@ class BookingByReviewController extends Controller
      */
     public function __invoke($reviewKey, Request $request) //invoke - контроллер - выполняющий только одно действие
     {
-        return new BookingByReviewShowResource(Booking::findByReviewKey($reviewKey)) ?? abort(404); // ?? если первое действие неудачное - выводится второе
+        $booking = Booking::findByReviewKey($reviewKey);
+        return $booking ? new BookingByReviewShowResource($booking) : abort(404); // ?? если первое действие неудачное - выводится второе
     }
 }
