@@ -43,11 +43,7 @@
                 v-model="review.content"
                 :class="[{'is-invalid': errorFor('content')}]"
               ></textarea>
-              <div
-                class="invalid-feedback"
-                v-for="(error, index) in errorFor('content')"
-                :key="'content' + index"
-              >{{ error }}</div>
+              <validation-errors :errors="errorFor('content')"></validation-errors>
             </div>
             <button
               class="btn btn-lg btn-primary btn-block"
@@ -77,7 +73,7 @@ export default {
       booking: null,
       error: false,
       errors: null,
-      sending: false,
+      sending: false
     };
   },
   // methods: {

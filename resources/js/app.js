@@ -34,12 +34,14 @@ window.Vue = require('vue');
  import moment from "moment";
  import StarRating from "./shared/component/StarRating";
  import FatalError from "./shared/component/FatalError";
+ import ValidationErrors from "./shared/component/ValidationErrors";
 
  Vue.use(VueRouter);
  Vue.filter("fromNow", (value) => {return moment(value).fromNow()});// register filter globaly
  Vue.component("star-rating", StarRating);
 
  Vue.component("fatal-error", FatalError);
+ Vue.component("v-errors", ValidationErrors);
 
 const app = new Vue({
     el: '#app',
