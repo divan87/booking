@@ -34,6 +34,7 @@ window.Vue = require('vue');
  import moment from "moment";
  import StarRating from "./shared/component/StarRating";
  import FatalError from "./shared/component/FatalError";
+ import Succsess from "./shared/component/Succsess";
  import ValidationErrors from "./shared/component/ValidationErrors";
 
  Vue.use(VueRouter);
@@ -41,6 +42,7 @@ window.Vue = require('vue');
  Vue.component("star-rating", StarRating);
 
  Vue.component("fatal-error", FatalError);
+ Vue.component("succsess", Succsess);
  Vue.component("v-errors", ValidationErrors);
 
 const app = new Vue({

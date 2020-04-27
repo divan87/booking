@@ -1,7 +1,8 @@
 <template>
   <div>
     <fatal-error v-if="error"></fatal-error>
-    <div class="row" v-else>
+    <succsess v-if="succsess">You've left a review, thank you very much</succsess>
+    <div class="row" v-if="!succsess && !error">
       <div :class="[{'col-md-4': twoColumns}, {'d-none': oneColumn}]">
         <div class="card">
           <div class="card-body">
@@ -74,7 +75,8 @@ export default {
       loading: false,
       booking: null,
       error: false,
-      sending: false
+      sending: false,
+      succsess: false
     };
   },
   // methods: {
@@ -82,20 +84,21 @@ export default {
   //         console.log(rating);
   //     },
   // },
- async created() {
+  async created() {
     this.review.id = this.$route.params.id;
     this.loading = true;
 
-
     try {
-    this.existingReview= (await axios
-      .get(`/api/reviews/${this.review.id}`)).data.data;
+      this.existingReview = (
+        await axios.get(`/api/reviews/${this.review.id}`)
+      ).data.data;
     } catch (err) {
       if (is404(err)) {
         try {
-          this.booking = (await axios
-            .get(`/api/booking-by-review/${this.review.id}`)).data.data;
-        } catch(err) {
+          this.booking = (
+            await axios.get(`/api/booking-by-review/${this.review.id}`)
+          ).data.data;
+        } catch (err) {
           this.error = !is404(err);
         }
       } else {
@@ -104,7 +107,6 @@ export default {
     }
 
     this.loading = false;
-
 
     // axios
     //   .get(`/api/reviews/${this.review.id}`)
@@ -151,9 +153,12 @@ export default {
     submit() {
       this.errors = null;
       this.sending = true;
+      this.succsess = false;
       axios
         .post(`/api/reviews`, this.review)
-        .then(response => console.log(response))
+        .then(response => {
+          this.succsess = 201 === response.status; //succsess будет true если response.status = 201
+        })
         .catch(err => {
           if (is422(err)) {
             const errors = err.response.data.errors;
