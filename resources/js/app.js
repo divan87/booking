@@ -30,12 +30,14 @@ window.Vue = require('vue');
 
  import router from './routes';
  import VueRouter from 'vue-router';
+ import Vuex from 'vuex';
  import Index from './index';
  import moment from "moment";
  import StarRating from "./shared/component/StarRating";
  import FatalError from "./shared/component/FatalError";
  import Succsess from "./shared/component/Succsess";
  import ValidationErrors from "./shared/component/ValidationErrors";
+ import storeDefinition from "./store";
 
  Vue.use(VueRouter);
  Vue.filter("fromNow", (value) => {return moment(value).fromNow()});// register filter globaly
@@ -45,9 +47,14 @@ window.Vue = require('vue');
  Vue.component("succsess", Succsess);
  Vue.component("v-errors", ValidationErrors);
 
+ Vue.use(Vuex)
+
+const store = new Vuex.Store(storeDefinition);
+
 const app = new Vue({
     el: '#app',
     router,
+    store : store,
     components: {
         "index": Index
     },
