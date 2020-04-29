@@ -1967,7 +1967,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [_shared_mixins_validationErrors__WEBPACK_IMPORTED_MODULE_1__["default"]],
   props: {
-    bookableId: String
+    bookableId: [String, Number]
   },
   data: function data() {
     return {
@@ -2111,7 +2111,7 @@ __webpack_require__.r(__webpack_exports__);
 //import moment from 'moment'; //local register. To register global - see app.js
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    bookableId: String
+    bookableId: [String, Number]
   },
   data: function data() {
     return {
@@ -7124,7 +7124,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nlabel[data-v-d3fdfb9c] {\r\n  font-size: 0.7rem;\r\n  color: gray;\r\n  font-weight: bold;\r\n  text-transform: uppercase;\n}\r\n", ""]);
+exports.push([module.i, "\nlabel[data-v-d3fdfb9c] {\n  font-size: 0.7rem;\n  color: gray;\n  font-weight: bold;\n  text-transform: uppercase;\n}\n", ""]);
 
 // exports
 
@@ -57759,15 +57759,6 @@ var render = function() {
             attrs: { to: { name: "Bookables" } }
           },
           [_vm._v("Home")]
-        ),
-        _vm._v(" "),
-        _c(
-          "router-link",
-          {
-            staticClass: "btn nav-button",
-            attrs: { to: { name: "BookableListItem" } }
-          },
-          [_vm._v("Second")]
         )
       ],
       1
