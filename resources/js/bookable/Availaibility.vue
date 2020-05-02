@@ -49,8 +49,8 @@ export default {
   },
   data() {
     return {
-      from: null,
-      to: null,
+      from: this.$store.state.lastSearch.from,
+      to: this.$store.state.lastSearch.to,
       loading: false,
       status: null,
     };
@@ -59,6 +59,11 @@ export default {
     check() {
       this.loading = true;
       this.errors = null;
+
+      this.$store.commit('setLastSearch', {
+        from: this.from,
+        to: this.to,
+      });
 
       axios
         .get(
